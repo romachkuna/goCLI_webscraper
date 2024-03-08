@@ -5,6 +5,11 @@ import (
 	"sync"
 )
 
+func crawlerResult() *[]Information {
+	informationList := startCrawlers()
+	return informationList
+}
+
 func startCrawlers() *[]Information {
 	var wg sync.WaitGroup
 	wg.Add(1)

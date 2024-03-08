@@ -21,7 +21,14 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	err = uploadDetails(ctx, client)
+	result := crawlerResult()
+
+	err = uploadDetails(ctx, client, result)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	err = uploadHomePage(ctx, client, result)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -34,8 +41,8 @@ func main() {
 	}(client)
 }
 
-func uploadDetails(ctx context.Context, client *firestore.Client) error {
-	data := *prepareData()
+func uploadDetails(ctx context.Context, client *firestore.Client, informationList *[]Information) error {
+	data := *prepareFirebaseDetails(informationList)
 
 	for key, value := range data {
 		_, err := client.Collection("details").Doc(key).Set(ctx, value)
@@ -44,5 +51,17 @@ func uploadDetails(ctx context.Context, client *firestore.Client) error {
 		}
 	}
 
+	return nil
+}
+
+func uploadHomePage(ctx context.Context, client *firestore.Client, informationList *[]Information) error {
+	data := *prepareFirebaseHomePage(informationList)
+
+	for key, value := range data {
+		_, err := client.Collection("home_page_content").Doc(key).Set(ctx, value)
+		if err != nil {
+			log.Fatalf("error setting document: %v\n", err)
+		}
+	}
 	return nil
 }
