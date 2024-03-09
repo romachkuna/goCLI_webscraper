@@ -45,7 +45,7 @@ func uploadDetails(ctx context.Context, client *firestore.Client, informationLis
 	data := *prepareFirebaseDetails(informationList)
 
 	for key, value := range data {
-		_, err := client.Collection("details").Doc(key).Set(ctx, value)
+		_, err := client.Collection("details").Doc(key).Set(ctx, value, firestore.MergeAll)
 		if err != nil {
 			log.Fatalf("error setting document: %v\n", err)
 		}
@@ -58,7 +58,7 @@ func uploadHomePage(ctx context.Context, client *firestore.Client, informationLi
 	data := *prepareFirebaseHomePage(informationList)
 
 	for key, value := range data {
-		_, err := client.Collection("home_page_content").Doc(key).Set(ctx, value)
+		_, err := client.Collection("home_page_content").Doc(key).Set(ctx, value, firestore.MergeAll)
 		if err != nil {
 			log.Fatalf("error setting document: %v\n", err)
 		}
