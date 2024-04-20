@@ -71,3 +71,14 @@ func generatePercentageDetails() percentageDetails {
 		YearlyMoto:  "Yearly Moto",
 	}
 }
+
+type CompatibilityDetails struct {
+	CareerWorkDisc   string `json:"career_work_disc"`
+	CareerWorkPerc   string `json:"career_work_perc"`
+	FriendshipDisc   string `json:"friendship_disc"`
+	FriendshipPerc   string `json:"friendship_perc"`
+	MarriageDisc     string `json:"marriage_disc"`
+	MarriagePerc     string `json:"marriage_perc"`
+	RelationshipDisc string `json:"relationship_disc"`
+	RelationshipPerc string `json:"relationship_perc"`
+}

@@ -33,6 +33,11 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	//err = uploadCompatiblity(ctx, client)
+	//if err != nil {
+	//	log.Fatalln(err)
+	//}
+
 	defer func(client *firestore.Client) {
 		err := client.Close()
 		if err != nil {
@@ -65,3 +70,35 @@ func uploadHomePage(ctx context.Context, client *firestore.Client, informationLi
 	}
 	return nil
 }
+
+//func uploadCompatiblity(ctx context.Context, client *firestore.Client) error {
+//	dummyData := CompatibilityDetails{
+//		CareerWorkDisc:   "",
+//		CareerWorkPerc:   "",
+//		FriendshipDisc:   "",
+//		FriendshipPerc:   "",
+//		MarriageDisc:     "",
+//		MarriagePerc:     "",
+//		RelationshipDisc: "",
+//		RelationshipPerc: "",
+//	}
+//	dummyMap := make(map[string]CompatibilityDetails)
+//	uploadMap := make(map[string]map[string]CompatibilityDetails)
+//
+//	for i := 0; i < 12; i++ {
+//		dummyMap[strconv.Itoa(i)] = dummyData
+//	}
+//
+//	for i := 0; i < 12; i++ {
+//		uploadMap[strconv.Itoa(i)] = dummyMap
+//	}
+//
+//	for key, value := range uploadMap {
+//		_, err := client.Collection("compatibility").Doc(key).Set(ctx, value, firestore.MergeAll)
+//		if err != nil {
+//			log.Fatalf("error setting document: %v\n", err)
+//		}
+//	}
+//	return nil
+//
+//}
